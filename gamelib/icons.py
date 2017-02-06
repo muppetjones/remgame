@@ -6,7 +6,6 @@ import sys
 
 import pygame
 from gamelib import colors
-from pipeline.util import logging as pipelog
 
 SHAPE_DICT = None
 

@@ -5,7 +5,7 @@ import logging
 import sys
 
 import pygame
-from pipeline.util import logging as pipelog
+from gamelib import logging as gamelog
 from pygame import locals as pylocals
 
 log = logging.getLogger(__name__)
@@ -26,5 +26,5 @@ def main():
 
 
 if __name__ == '__main__':
-    pipelog.config()
+    gamelog.config()
     main()

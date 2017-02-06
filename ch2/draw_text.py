@@ -6,8 +6,8 @@ import sys
 
 import pygame
 import pygame.locals as pylocals
+from gamelib import logging as gamelog
 from gamelib import colors, fonts
-from pipeline.util import logging as pipelog
 
 log = logging.getLogger(__name__)
 
@@ -34,6 +34,7 @@ def main():
                 sys.exit()
         pygame.display.update()
 
+
 if __name__ == '__main__':
-    pipelog.config()
+    gamelog.config()
     main()

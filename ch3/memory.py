@@ -7,7 +7,6 @@ import sys
 
 import pygame
 from gamelib import colors, icons, sounds
-from pipeline.util import logging as pipelog
 from pygame.locals import K_ESCAPE, KEYUP, MOUSEBUTTONUP, MOUSEMOTION, QUIT
 
 log = logging.getLogger(__name__)
@@ -477,5 +476,4 @@ def main():
 
 
 if __name__ == '__main__':
-    pipelog.config()
     main()

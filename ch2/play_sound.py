@@ -3,11 +3,10 @@
 
 import logging
 import sys
-import time
 
 import pygame
+from gamelib import logging as gamelog
 from gamelib import sounds
-from pipeline.util import logging as pipelog
 from pygame import locals as pylocals
 
 log = logging.getLogger(__name__)
@@ -21,10 +20,7 @@ def main():
     pygame.mixer.music.load(sounds.background)
     pygame.mixer.music.play(-1, 0.0)
 
-    log.debug(sounds.pickup)
-    log.debug(sounds.beep2)
     sound_obj = pygame.mixer.Sound(sounds.pickup)
-    # sound_obj = pygame.mixer.Sound(sounds.beep2)
 
     while True:
         for event in pygame.event.get():
@@ -40,5 +36,5 @@ def main():
 
 
 if __name__ == '__main__':
-    pipelog.config()
+    gamelog.config()
     main()

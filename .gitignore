@@ -1,0 +1,10 @@
+# pyenv (per machine)
+.python-version
+
+# python files
+__pycache__/
+*.py[cod]
+
+
+# mac files
+.DS_Store
