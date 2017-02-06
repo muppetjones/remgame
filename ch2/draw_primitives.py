@@ -5,7 +5,7 @@ import logging
 import sys
 
 import pygame
-from gamelib import colours
+from gamelib import colors
 from pipeline.util import logging as pipelog
 from pygame import locals as pylocals
 
@@ -18,24 +18,24 @@ def main():
     pygame.display.set_caption('Drawing!')
 
     # draw on surface
-    DISPLAYSURF.fill(colours.WHITE)
+    DISPLAYSURF.fill(colors.WHITE)
     pygame.draw.polygon(
-        DISPLAYSURF, GREEN,
+        DISPLAYSURF, colors.GREEN,
         ((146, 0), (291, 106), (236, 277), (56, 277), (0, 106))
     )
-    pygame.draw.line(DISPLAYSURF, BLUE, (60, 60), (120, 60), 4)
-    pygame.draw.line(DISPLAYSURF, BLUE, (120, 60), (60, 120))
-    pygame.draw.line(DISPLAYSURF, BLUE, (60, 120), (120, 120), 4)
-    pygame.draw.circle(DISPLAYSURF, BLUE, (300, 50), 20, 0)
-    pygame.draw.ellipse(DISPLAYSURF, RED, (300, 250, 40, 80), 1)
-    pygame.draw.rect(DISPLAYSURF, RED, (200, 150, 100, 50))
+    pygame.draw.aaline(DISPLAYSURF, colors.BLUE, (60, 60), (120, 60), 4)
+    pygame.draw.aaline(DISPLAYSURF, colors.BLUE, (120, 60), (60, 120))
+    pygame.draw.aaline(DISPLAYSURF, colors.BLUE, (60, 120), (120, 120), 4)
+    pygame.draw.circle(DISPLAYSURF, colors.BLUE, (300, 50), 20, 0)
+    pygame.draw.ellipse(DISPLAYSURF, colors.RED, (300, 250, 40, 80), 1)
+    pygame.draw.rect(DISPLAYSURF, colors.RED, (200, 150, 100, 50))
 
     pixObj = pygame.PixelArray(DISPLAYSURF)
-    pixObj[480][380] = colours.BLACK
-    pixObj[482][382] = colours.BLACK
-    pixObj[483][384] = colours.BLACK
-    pixObj[486][386] = colours.BLACK
-    pixObj[488][388] = colours.BLACK
+    pixObj[480][380] = colors.BLACK
+    pixObj[482][382] = colors.BLACK
+    pixObj[483][384] = colors.BLACK
+    pixObj[486][386] = colors.BLACK
+    pixObj[488][388] = colors.BLACK
     del pixObj
 
     while True:
