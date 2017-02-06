@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""A simple memory game."""
+"""A simple memory game.
+
+Based on memorypuzzle by Al Sweigart
+"""
 
 import logging
 import random
@@ -40,7 +43,7 @@ HIGHLIGHT_COLOR = colors.blue
 #  ######  #  ####  #      ###### #    #   #
 
 class Display():
-    """Handle pygame display."""
+    """Store and handle data related to pygame.display."""
 
     def __init__(
             self, fps=FPS, win_width=WIN_WIDTH, win_height=WIN_HEIGHT,
@@ -108,19 +111,27 @@ class GameBox():
             self.pixel_x, self.pixel_y, self.box_size, self.box_size)
 
     def __eq__(self, box):
+        """Compare the shape and color of the icon."""
         if self.icon == box.icon:
             return True
         return False
 
     @classmethod
     def set_board_data(cls, data):
+        """Set the board data for the class."""
         cls.BOARD_DATA.update(data)
         for k, v in cls.BOARD_DATA.items():
             setattr(cls, k, v)
 
     @classmethod
     def upper_left_coord_of_box(cls, x, y):
-        """Convert board coordinates to pixel coordinates."""
+        """Convert board coordinates to pixel coordinates.
+
+        Arguments:
+            x, y: Box coordinates.
+        Return:
+            A tuple of pixel coordinates.
+        """
         left = x * (cls.box_size + cls.gap_size) + cls.x_margin
         top = y * (cls.box_size + cls.gap_size) + cls.y_margin
         return (left, top)
@@ -130,10 +141,17 @@ class GameBox():
         return self.box.collidepoint(*pixel_coord)
 
     def draw(self, display, force_reveal=False):
-        """Draw ourselves."""
-        # log.debug(dedent("""
-        #     Drawing box {} at {}
-        # """).strip().format(self.box_coord, self.pixel_coord))
+        """Draw ourselves.
+
+        If revealed, draw the icon on the card background; otherwise
+        draw the card back.
+
+        Arguments:
+            display: A pygame.display object.
+            force_reveal: If true, will draw the revealed card,
+                regardless of the value of self.revealed.
+        Returns: None.
+        """
         if self.revealed or force_reveal:
             # draw the icon
             pygame.draw.rect(display, self.box_bg_color, self.box)
@@ -247,7 +265,13 @@ class GameBoard():
 
     @classmethod
     def get_randomized_board(cls, n_col, n_row):
-        """Get a list of every possible shape in every possible color."""
+        """Get a dictionary of GameBox items, with random shapes and colors.
+
+        Arguments:
+            n_col, n_row: The dimensions of the board.
+        Return:
+            A dict with of GameBox objects, {coord: box}.
+        """
         icons = [
             (shape, color)
             for color in cls.COLORS
@@ -267,7 +291,13 @@ class GameBoard():
         return board
 
     def get_box_at_pixel(self, pixel_coord):
-        """Find the box that contains the given pixel_coord."""
+        """Find the box that contains the given pixel_coord."
+
+        Arguments:
+            pixel_coord: Pixel coordinates, e.g., mouse position.
+        Return:
+            The box that contains the pixel; None if pixe isn't in a box.
+        """
         box_list = [
             box for box in self.board.values()
             if box.contains(pixel_coord)
@@ -278,7 +308,7 @@ class GameBoard():
             return None
 
     def has_won(self):
-        """Check if the player has won."""
+        """Check if the player has won, e.g., all boxes revealed."""
         return all(box.revealed for box in self.board.values())
 
     #
@@ -290,8 +320,7 @@ class GameBoard():
     #  #    # #    # # #    # #    #   #   #  ####  #    #
 
     def start_game_animation(self):
-        """Randomly reveal 8 boxes at a time."""
-        # covered_boxes = self.generate_revealed_boxes_data(False)
+        """Randomly reveal boxes (n_col at a time) at game start."""
         boxes = list(self.board.values())
         random.shuffle(boxes)
         box_groups = [boxes[i::self.n_row] for i in range(self.n_row)]
@@ -302,7 +331,11 @@ class GameBoard():
             self.cover_boxes_animation(box_group)
 
     def reveal_boxes_animation(self, boxes_to_reveal):
-        """Animate the box revealing."""
+        """Animate the box revealing.
+
+        Arguments: A list of box objects.
+        Returns: None.
+        """
         cov_list = range(
             self.box_size,
             (-1 * self.reveal_speed) - 1,
@@ -313,6 +346,11 @@ class GameBoard():
         return
 
     def cover_boxes_animation(self, boxes_to_cover):
+        """Animate the box covering.
+
+        Arguments: A list of box objects.
+        Returns: None.
+        """
         cov_list = range(
             0, self.box_size + self.reveal_speed, self.reveal_speed)
         for coverage in cov_list:
@@ -341,16 +379,17 @@ class GameBoard():
     #  #     # #   #  #    # ##  ## # #   ## #    #
     #  ######  #    # #    # #    # # #    #  ####
 
-    def draw_icon(self, box):
-        shape, color = box.icon
-        icons.draw(
-            self.display, shape, box.pixel_coord, self.box_size,
-            color=color, bg_color=self.display_obj.bg_color,
-        )
-        return
-
     def draw_box_covers(self, boxes, coverage):
-        """Draw boxes being covered/revealed."""
+        """Draw boxes being covered/revealed.
+
+        Draw a single frame for the animation of covering and
+        revealing boxes.
+
+        Arguments:
+            boxes: The list of boxes to cover/reveal.
+            coverage: Portion of box to cover.
+        Returns: None.
+        """
         coverage = min(coverage, self.box_size)
         for box in boxes:
             left, top = box.pixel_coord
@@ -374,6 +413,11 @@ class GameBoard():
         return
 
     def draw_box_highlight(self, box):
+        """Draw a highlight around the given box.
+
+        Arguments: The box to highlight.
+        Returns: None.
+        """
         left, top = box.pixel_coord
         pygame.draw.rect(
             self.display, self.highlight_color,
@@ -410,16 +454,15 @@ def main():
             display_obj.fill()
             main_board.draw_board()
 
-        for event in pygame.event.get():  # event handling loop
+        # event handling loop
+        for event in pygame.event.get():
             if event.type == QUIT or \
                     (event.type == KEYUP and event.key == K_ESCAPE):
                 pygame.quit()
                 sys.exit()
             elif event.type == MOUSEMOTION:
-                # mouse_x, mouse_y = event.pos
                 mouse_coord = event.pos
             elif event.type == MOUSEBUTTONUP:
-                # mouse_x, mouse_y = event.pos
                 mouse_coord = event.pos
                 mouse_clicked = True
 
@@ -456,19 +499,21 @@ def main():
                     # second choice -- check it and close if different
                     if box != first_box:
                         # icon's don't match
+                        # -- play a sound then cover the two boxes
                         second_sound.play()
                         pygame.time.wait(100)
                         main_board.cover_boxes_animation([first_box, box])
                         first_box.revealed = False
                         box.revealed = False
                     elif main_board.has_won():
+                        # all boxes matched -- flash screen and reload
                         main_board.game_won_animation()
                         main_board = None
                         pygame.time.wait(1000)
                     else:
                         match_sound.play()
 
-                    first_box = None
+                    first_box = None  # done handling the choices
 
         # redraw the screen
         pygame.display.update()
