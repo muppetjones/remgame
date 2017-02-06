@@ -23,7 +23,6 @@ BOX_SIZE = 40
 GAP_SIZE = 10
 N_COL = 6
 N_ROW = 4
-DISPLAY = None
 
 # colors
 BG_COLOR = colors.light_gray
@@ -435,7 +434,6 @@ class GameBoard():
 
 def main():
     """Entrypoint."""
-    global FPSCLOCK, DIPLAY, PIXEL_LOOKUP
     pygame.init()
     display_obj = Display(caption='Memory!')
     main_board = None

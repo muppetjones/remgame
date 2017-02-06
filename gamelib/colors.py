@@ -45,6 +45,7 @@ def load_colors(load_dict):
     for name, rgb in load_dict.items():
         setattr(sys.modules[__name__], name.upper(), rgb)
         setattr(sys.modules[__name__], name.lower(), pygame.Color(*rgb))
+        log.debug(pygame.Color(*rgb))
 
     colorblind_colors = colorblind.__dict__.copy()
     for name, rgb in colorblind_colors.items():
