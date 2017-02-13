@@ -1,0 +1,78 @@
+= REM-game
+Stephen J. Bush <muppetjones@gail.com>
+:toc:
+:sectlinks:
+
+.
+[NOTE]
+====
+These programs are based off _Making Games with Python & Pygame_ by
+Al Sweigart. In most cases they have been modified on the fly to add
+a more OO approach, but no testing (other than play-testing) has been
+done.
+
+tl;dr: These apps are by no means polished.
+
+'Stephen Bush'
+====
+
+:!numbered:
+[Abstract]
+
+In general, most of the games attempt to wrap the board and its pieces
+into a series of classes. They also attempt to make the board more dynamic
+to generate, i.e., if the screen dimensions are changed, the board will adapt
+with it; although, this is has not been thoroughly tested.
+
+In addition, the color schemes have been modified to be more color-blind friendly.
+
+
+:numbered:
+
+== Chapter 2: Demos
+
+These scripts are basic pygame demos taken almost directly from the book.
+
+== Chapter 3: Memory Game 
+
+A very basic memory game.
+
+.Change list:
+- Modified color scheme.
+- More "card-like" game play.
+
+== Chapter 4: Slide game
+
+The basic game of numbered sliding tiles.
+
+.Change list:
+- Alternate tile implementation.
+- Initial setup is completely random, and the win condition is checked
+simply by the value of the tiles.
+
+== Chapter 5: Patterns
+
+A Simon clone.
+
+.Change list:
+- Faster animations.
+- Alternate pattern and matching implementation.
+- Removed flashing background color.
+- Multiple control options.
+
+== Chapter 6: _C. elegans_
+
+A Nibbles clone.
+
+.Change list:
+- Multiple control options.
+
+== Chapter 7: Blocks
+
+A Tetris Clone.
+
+.Change list:
+- Multiple control options
+- Bonus scoring if more than one line is matched.
+- Lines flash before being removed.
+- Background and game border colors change with the level.
