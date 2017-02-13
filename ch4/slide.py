@@ -2,6 +2,16 @@
 """Simple slide puzzle.
 
 Based on slidepuzzle by Al Sweigart.
+
+         UP
+LEFT     BLANK      RIGHT
+         DOWN
+
+
+blank = 0,0
+up, left = none
+right = 1,0
+down = 0,1
 """
 
 import logging
@@ -357,10 +367,33 @@ class SlideBoard(GameBoard):
             for box in self.box_list
         }
         self.coord_lookup = {
-            box.box_coord: text
-            for text, box in self.text_lookup.items()
+            box.box_coord: i
+            for i, box in enumerate(self.box_list)
+            # for text, box in self.text_lookup.items()
         }
         return
+
+    def get_clickable_tiles(self):
+        blank_x, blank_y = self.text_lookup[''].box_coord
+        adjac_coord = {UP: None, DOWN: None, LEFT: None, RIGHT: None}
+
+        # NOTE: The apparent directions are backwards: They refer
+        #   to the direction the tile will move, not the tile location
+        if blank_y > 0:
+            adjac_coord[DOWN] = (blank_x, blank_y - 1)
+        if blank_y < self.n_row - 1:
+            adjac_coord[UP] = (blank_x, blank_y + 1)
+        if blank_x > 0:
+            adjac_coord[RIGHT] = (blank_x - 1, blank_y)
+        if blank_x < self.n_col - 1:
+            adjac_coord[LEFT] = (blank_x + 1, blank_y)
+
+        clickable_list = {
+            direction: self.box_list[self.coord_lookup[coord]]
+            for direction, coord in adjac_coord.items()
+            if coord
+        }
+        return clickable_list
 
     def is_solved(self):
         solution = list(range(1, self.n_col * self.n_row))
@@ -416,7 +449,7 @@ class SlideBoard(GameBoard):
             dir_y = + 1
 
         move_text = self.coord_lookup[(move_x, move_y)]
-        move_tile = self.text_lookup[move_text]
+        move_tile = self.box_list[move_text]
 
         tmp_blank = GameBox(coord=(move_x, move_y), text='')
 
@@ -506,8 +539,6 @@ def main():
     """Entrypoint."""
     pygame.init()
 
-    log.debug(BG_COLOR)
-
     display = Display(caption='Slide!')
 
     buttons = [
@@ -535,6 +566,13 @@ def main():
                     if button.contains(mouse_coord):
                         button.action(main_board)
                         msg = button.text
+                        break
+
+                for direction, box in main_board.get_clickable_tiles().items():
+                    if box.contains(mouse_coord):
+                        slide_to = direction
+                        break
+
             elif event.type == KEYUP:
                 if event.key in KEY_UP:
                     slide_to = UP

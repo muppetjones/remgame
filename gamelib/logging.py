@@ -118,6 +118,8 @@ def _get_config_dict(log_level):
 
 def config(log_level='DEBUG'):
     """Setup custom logging options."""
+    if isinstance(log_level, str):
+        log_level = getattr(logging, log_level)
     config_dict = _get_config_dict(log_level)
     logging.config.dictConfig(config_dict)
 
