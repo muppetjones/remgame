@@ -60,7 +60,7 @@ A Simon clone.
 - Removed flashing background color.
 - Multiple control options.
 
-== Chapter 6: _C. elegans_
+== Chapter 6: _elegans_
 
 A Nibbles clone.
 
