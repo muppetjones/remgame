@@ -7,17 +7,25 @@ Stephen J. Bush <muppetjones@gail.com>
 [NOTE]
 ====
 These programs are based off of 
-http://inventwithpython.com/pygame/index.html[_Making Games with Python & Pygame_ by Al Sweigart]. In most cases they have been modified on the fly to add
+http://inventwithpython.com/pygame/index.html[_Making Games with Python & Pygame_ by Al Sweigart]. 
+In most cases they have been modified to add
 a more OO approach, but no testing (other than play-testing) has been
 done.
-
-The original code (indicated in the comments within the relevant files), 
-sounds, and images for each game are not my own works.
-and fall under the "Simplified BSD" license. 
 
 tl;dr: These scripts are learning examples for pygame and are by no means polished.
 
 'Stephen Bush'
+====
+
+.Legal
+[NOTE]
+====
+The included original scripts by Al Sweigart, in addition to the music and images,
+were downloaded from the http://inventwithpython.com/pygame/index.html[book website].
+These items fall under the "Simplified BSD" license.
+
+The scripts I wrote were based mostly off of the 2nd ed., which used a
+Creative Commons Attribution-Noncommerical-Share Alike 3.0 Unites States License.
 ====
 
 :!numbered:
