@@ -6,8 +6,8 @@ Stephen J. Bush <muppetjones@gail.com>
 .
 [NOTE]
 ====
-These programs are based off _Making Games with Python & Pygame_ by
-Al Sweigart. In most cases they have been modified on the fly to add
+These programs are based off of 
+http://inventwithpython.com/pygame/index.html[_Making Games with Python & Pygame_ by Al Sweigart]. In most cases they have been modified on the fly to add
 a more OO approach, but no testing (other than play-testing) has been
 done.
 
