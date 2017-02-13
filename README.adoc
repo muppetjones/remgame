@@ -11,7 +11,7 @@ Al Sweigart. In most cases they have been modified on the fly to add
 a more OO approach, but no testing (other than play-testing) has been
 done.
 
-tl;dr: These apps are by no means polished.
+tl;dr: These scripts are learning examples for pygame and are by no means polished.
 
 'Stephen Bush'
 ====
