@@ -18,6 +18,7 @@ tl;dr: These scripts are learning examples for pygame and are by no means polish
 
 :!numbered:
 [Abstract]
+== Description
 
 In general, most of the games attempt to wrap the board and its pieces
 into a series of classes. They also attempt to make the board more dynamic
