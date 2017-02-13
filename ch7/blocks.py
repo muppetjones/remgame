@@ -10,7 +10,6 @@ from gamelib import util as gameutil
 from gamelib import Display, GameBoard, colors, fonts, sounds
 from gamelib.constants import KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_UP
 from pieces import BLANK, SHAPES, TEMPLATE_HEIGHT, TEMPLATE_WIDTH
-from pipeline.util import beautify
 from pygame.locals import K_SPACE, KEYDOWN, KEYUP, K_q
 
 log = logging.getLogger(__name__)
@@ -234,13 +233,8 @@ class TetrisPiece():
 
         for x in range(TEMPLATE_WIDTH):
             for y in range(TEMPLATE_HEIGHT):
-                try:
-                    if shape[y][x] != BLANK:
-                        yield self.x + x, self.y + y
-                except IndexError:
-                    log.debug((x, y))
-                    log.debug(beautify(self.shape))
-                    raise
+                if shape[y][x] != BLANK:
+                    yield self.x + x, self.y + y
 
     def move_down(self):
         self.y = self.y + 1
