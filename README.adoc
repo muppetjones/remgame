@@ -11,6 +11,10 @@ Al Sweigart. In most cases they have been modified on the fly to add
 a more OO approach, but no testing (other than play-testing) has been
 done.
 
+The original code (indicated in the comments within the relevant files), 
+sounds, and images for each game are not my own works.
+and fall under the "Simplified BSD" license. 
+
 tl;dr: These scripts are learning examples for pygame and are by no means polished.
 
 'Stephen Bush'
@@ -26,7 +30,6 @@ to generate, i.e., if the screen dimensions are changed, the board will adapt
 with it; although, this is has not been thoroughly tested.
 
 In addition, the color schemes have been modified to be more color-blind friendly.
-
 
 :numbered:
 
