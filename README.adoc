@@ -21,8 +21,8 @@ tl;dr: These scripts are learning examples for pygame and are by no means polish
 [NOTE]
 ====
 The included original scripts by Al Sweigart, in addition to the music and images,
-were downloaded from the http://inventwithpython.com/pygame/index.html[book website].
-These items fall under the "Simplified BSD" license.
+were downloaded from the http://inventwithpython.com/pygame/index.html[book website],
+i.e., the 3rd ed. These items fall under the "Simplified BSD" license.
 
 The scripts I wrote were based mostly off of the 2nd ed., which used a
 Creative Commons Attribution-Noncommerical-Share Alike 3.0 Unites States License.
